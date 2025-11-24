@@ -144,6 +144,18 @@ body {
   margin: 0;
 }
 
+/* Caption styles */
+.article .content figcaption,
+.article .content figure figcaption,
+.article .content [class*="caption"],
+.article .content [class*="credit"] {
+  font-size: 13px !important;
+  color: #666 !important;
+  margin-top: 8px;
+  font-style: italic;
+  line-height: 1.5 !important;
+}
+
 .article .content a {
   color: #0066cc;
   text-decoration: underline;
