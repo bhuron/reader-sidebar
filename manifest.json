@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Reader Sidebar",
+  "version": "1.0.0",
+  "description": "Extract and display article content in a sidebar",
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Open Reader Sidebar"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
