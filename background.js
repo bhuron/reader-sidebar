@@ -1,6 +1,18 @@
 // Open side panel when extension icon is clicked
 chrome.action.onClicked.addListener((tab) => {
-  chrome.sidePanel.open({ windowId: tab.windowId });
+  // Check if sidePanel API is available
+  if (chrome.sidePanel) {
+    chrome.sidePanel.open({ windowId: tab.windowId });
+  } else {
+    // Fallback: open as popup window
+    chrome.windows.create({
+      url: chrome.runtime.getURL('sidepanel.html'),
+      type: 'popup',
+      width: 400,
+      height: 600,
+      left: screen.width - 400
+    });
+  }
 });
 
 // Listen for messages from side panel

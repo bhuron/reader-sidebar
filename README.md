@@ -34,10 +34,12 @@ A Chrome extension that extracts article content from the current tab and displa
 ## Browser Compatibility
 
 Works on:
-- Google Chrome
-- Microsoft Edge
-- Brave Browser
+- Google Chrome 114+ (with sidebar)
+- Microsoft Edge (with sidebar)
+- Brave Browser (with sidebar)
 - Any Chromium-based browser supporting Manifest V3
+
+For browsers without Side Panel API support, the extension will open as a popup window instead.
 
 ## License
 
