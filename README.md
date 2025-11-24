@@ -6,7 +6,7 @@ A Chrome extension that extracts article content from the current tab and displa
 
 - Extracts content directly from the loaded page (works with paywalled content)
 - Clean, distraction-free reading interface
-- Adjustable font size
+- Adjustable font size with +/- buttons
 - Removes ads, navigation, and other clutter
 - Works on any Chromium-based browser
 
@@ -22,13 +22,14 @@ A Chrome extension that extracts article content from the current tab and displa
 
 1. Navigate to any article or webpage
 2. Click the extension icon in the toolbar
-3. The sidebar will open on the right
-4. Click "Extract" to read the current page in reader mode
-5. Adjust font size using the dropdown
+3. The sidebar will open automatically and extract the content
+4. Use the +/- buttons in the toolbar to adjust font size
 
-## Icons
+## Generating Icons
 
-You'll need to add icon files (icon16.png, icon48.png, icon128.png) or remove the icons section from manifest.json.
+1. Open `generate-icons.html` in your browser
+2. Click each download button to save the PNG icons
+3. The icons will be saved to your downloads folder
 
 ## Browser Compatibility
 
@@ -37,3 +38,7 @@ Works on:
 - Microsoft Edge
 - Brave Browser
 - Any Chromium-based browser supporting Manifest V3
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
