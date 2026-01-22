@@ -2,6 +2,14 @@
 function extractContent() {
   const startTime = performance.now();
 
+  // Pre-check: Use isProbablyReaderable to detect if page has extractable content
+  if (typeof isProbablyReaderable === 'function') {
+    const isReadable = isProbablyReaderable(document);
+    if (!isReadable) {
+      console.log('Page does not appear to have readable article content');
+    }
+  }
+
   // Method 1: Try Readability.js with document clone (doesn't modify original)
   let article = tryReadabilityParse();
 
@@ -45,6 +53,12 @@ function tryReadabilityParse(options = {}) {
       return null;
     }
 
+    // Detect page language
+    const pageLang = document.documentElement.lang ||
+                     document.querySelector('html')?.getAttribute('lang') ||
+                     navigator.language?.split('-')[0] ||
+                     'en';
+
     // Sanitize content with DOMPurify
     const sanitizedContent = DOMPurify.sanitize(article.content, {
       ALLOWED_TAGS: ['div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li',
@@ -61,7 +75,8 @@ function tryReadabilityParse(options = {}) {
       content: sanitizedContent,
       excerpt: article.excerpt || '',
       length: article.length || 0,
-      url: window.location.href
+      url: window.location.href,
+      lang: pageLang
     };
 
   } catch (error) {
@@ -72,6 +87,12 @@ function tryReadabilityParse(options = {}) {
 
 // Simplified fallback extraction
 function fallbackExtraction() {
+  // Detect page language
+  const pageLang = document.documentElement.lang ||
+                   document.querySelector('html')?.getAttribute('lang') ||
+                   navigator.language?.split('-')[0] ||
+                   'en';
+
   // Extract title
   const title = document.querySelector('h1')?.textContent ||
                 document.title ||
@@ -132,7 +153,8 @@ function fallbackExtraction() {
     content: sanitizedContent,
     excerpt: '',
     length: sanitizedContent.length,
-    url: window.location.href
+    url: window.location.href,
+    lang: pageLang
   };
 }
 

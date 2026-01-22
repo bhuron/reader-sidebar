@@ -4,6 +4,7 @@ const contentDiv = document.getElementById('content');
 
 // Font size management
 let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 16;
+let fontDebounceTimer = null;
 
 function updateFontSize(newSize) {
   currentFontSize = newSize;
@@ -11,7 +12,14 @@ function updateFontSize(newSize) {
   if (contentElement) {
     contentElement.style.fontSize = currentFontSize + 'px';
   }
-  localStorage.setItem('fontSize', currentFontSize);
+
+  // Debounce localStorage writes
+  if (fontDebounceTimer) {
+    clearTimeout(fontDebounceTimer);
+  }
+  fontDebounceTimer = setTimeout(() => {
+    localStorage.setItem('fontSize', currentFontSize);
+  }, 300);
 }
 
 increaseFontBtn.addEventListener('click', () => {
@@ -77,6 +85,11 @@ setTimeout(() => {
 
 // Display extracted content
 function displayContent(data) {
+  // Set the document language from the source page
+  if (data.lang) {
+    document.documentElement.lang = data.lang;
+  }
+
   const article = document.createElement('div');
   article.className = 'article';
 
